@@ -17,12 +17,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
 
-from test_your_brain_project import settings
+from django.conf import settings
 from testyourbrain import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('testyourbrain/', include('testyourbrain.urls')),
-    path('', views.index ,name='index')
+    path('', views.index ,name='index'),
+
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

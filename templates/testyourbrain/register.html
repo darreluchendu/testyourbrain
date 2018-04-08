@@ -1,0 +1,39 @@
+{% extends "testyourbrain/base.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+     {% if registered %}
+            <p1 style="font-family: 'Segoe UI Light'">Thank you for registering</p1>
+            <br/>
+
+            <a style="font-size: 25px" name="sign_in" href="{% url 'login' %}">Login</a>
+
+        {% else %}
+    <p class="h2">Register for an account</p>
+
+<form class="h4" method="post" action="">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Register" />
+{% endif %}
+</form>
+
+{% endblock %}
+
+
+{% comment %}
+**registration/register.html**
+Used to show the form users will fill out to register. By default, has
+the following context:
+
+``form``
+    The registration form. This will be an instance of some subclass
+    of ``django.forms.Form``; consult `Django's forms documentation
+    <http://docs.djangoproject.com/en/dev/topics/forms/>`_ for
+    information on how to display this in a template.
+{% endcomment %}

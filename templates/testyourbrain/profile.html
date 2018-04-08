@@ -1,0 +1,10 @@
+{% extends 'testyourbrain/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Home
+{% endblock %}
+{% block content %}
+    {{ user.username }}'s Profile
+    <button class="btn btn-primary btn-block">Edit Profile</button>
+{% endblock %}

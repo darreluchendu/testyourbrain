@@ -1,0 +1,11 @@
+{% extends 'testyourbrain/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Home
+{% endblock %}
+{% block content %}
+   {% for user in players %}
+   <p>{{ user.username }} is in this session</p>
+    {% endfor %}
+{% endblock %}

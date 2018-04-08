@@ -16,6 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
@@ -23,6 +24,11 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
+REGISTRATION_AUTO_LOGIN = True
+
+LOGIN_URL='/testyourbrain/login/'
+
 SECRET_KEY = '9&i4wzm4$h_mk9*yzxbr8ww$37a(fu)r!0mx*9d81&ch^+#_jf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -35,11 +41,14 @@ ALLOWED_HOSTS = ['darreluchendu.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'django.contrib.sites',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'testyourbrain','crispy_forms'
 ]
 
 MIDDLEWARE = [

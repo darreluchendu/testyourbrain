@@ -64,9 +64,19 @@ def user_login(request):
 @login_required
 def user_logout(request):
     user=UserProfile.objects.get(user=request.user)
-    user.session=None
-    user.save()
-    logout(request)
+    auth_list=GameSession.objects.filter().values_list('author')
+    try:
+        user_sesh=GameSession.objects.get(author=request.user)
+        try:
+            user_sesh.author=UserProfile.objects.filter(session=user_sesh)[0]
+        except:
+            user_sesh.delete()
+    except:
+        pass
+    finally:
+        user.session=None
+        user.save()
+        logout(request)
     return HttpResponseRedirect(reverse('index'))
 
 @login_required
@@ -87,17 +97,19 @@ def profile(request,username):
     return render(request, 'testyourbrain/profile.html', {})
 
 
-@user_passes_test(UserMethods.no_game)
+#@user_passes_test(UserMethods.no_game)
 @login_required
 def add_game(request):
     user=UserProfile.objects.get(user=request.user)
     if user.session:
-        return
+        return session(request,user.session.id)
     if request.method=='POST':
         game_form=NewSession(data=request.POST)
         game=game_form.save(commit=False)
         game.author=request.user
         game.save()
+        user.session=game
+
         return session(request,game.id)
     else:
         game_form=NewSession()
